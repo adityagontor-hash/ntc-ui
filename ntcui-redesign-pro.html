@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nursing Training Center FIK UI — Pelatihan &amp; Sertifikasi Tenaga Kesehatan</title>
+<meta name="description" content="NTC FIK UI adalah unit pelatihan kesehatan terakreditasi A Kemenkes RI di bawah Fakultas Ilmu Keperawatan Universitas Indonesia. Ikuti seminar, workshop, dan pelatihan bersertifikat untuk tenaga kesehatan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#081832;
+    --navy-800:#0F2545;
+    --navy-700:#1B3A66;
+    --gold-500:#F2B705;
+    --gold-600:#D9A400;
+    --gold-100:#FCEFC7;
+    --teal-600:#0D7377;
+    --teal-500:#12969B;
+    --teal-100:#DFF4F3;
+    --coral-500:#E85D4C;
+    --surface:#FFFFFF;
+    --bg-soft:#F5F7FB;
+    --bg-soft-2:#EEF1F8;
+    --text-body:#26304A;
+    --text-muted:#5C667E;
+    --line:#E2E6F0;
+    --radius-sm:10px;
+    --radius-md:16px;
+    --radius-lg:28px;
+    --shadow-card:0 16px 36px -20px rgba(8,24,50,.35);
+    --shadow-lift:0 24px 60px -24px rgba(8,24,50,.5);
+    --maxw:1200px;
+    --font-head:'Sora', system-ui, sans-serif;
+    --font-body:'Source Sans 3', system-ui, sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+  body{margin:0;font-family:var(--font-body);color:var(--text-body);background:var(--surface);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{font-family:var(--font-head);margin:0;color:var(--navy-900);line-height:1.15;}
+  section{padding:clamp(52px,7vw,104px) 0;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,32px);}
+  :focus-visible{outline:3px solid var(--teal-600);outline-offset:3px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:var(--navy-800);background:var(--gold-100);border:1px solid var(--gold-600);padding:6px 14px;border-radius:999px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-head);font-weight:600;font-size:.95rem;padding:13px 26px;border-radius:10px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;line-height:1.1;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--gold-500);color:var(--navy-900);box-shadow:0 14px 30px -12px rgba(242,183,5,.55);}
+  .btn-primary:hover{background:var(--gold-600);}
+  .btn-outline{border-color:rgba(255,255,255,.55);color:#fff;}
+  .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+  .btn-dark{background:var(--navy-900);color:#fff;}
+  .btn-dark:hover{background:var(--navy-800);}
+  .btn-block{width:100%;}
+  .skip-link{position:absolute;left:-999px;top:auto;background:var(--navy-900);color:#fff;padding:12px 20px;border-radius:0 0 8px 0;z-index:200;}
+  .skip-link:focus{left:0;top:0;}
+
+  /* Header */
+  header.site{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;color:var(--navy-900);}
+  .brand img{height:40px;width:auto;border-radius:6px;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text small{font-family:var(--font-body);font-weight:600;color:var(--text-muted);font-size:.68rem;letter-spacing:.03em;}
+  nav.primary{display:flex;align-items:center;gap:2px;}
+  nav.primary a{padding:10px 14px;border-radius:8px;font-weight:600;font-size:.94rem;color:var(--navy-800);transition:background-color .15s ease;}
+  nav.primary a:hover{background:var(--bg-soft-2);}
+  .nav-actions{display:flex;align-items:center;gap:12px;}
+  .nav-cta{padding:11px 20px;font-size:.88rem;}
+  .menu-toggle{display:none;background:var(--navy-900);color:#fff;border:none;border-radius:8px;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer;}
+  .menu-toggle svg{width:22px;height:22px;}
+  @media (max-width:900px){
+    nav.primary{position:fixed;inset:76px 0 0 0;background:#fff;flex-direction:column;align-items:stretch;padding:12px 20px 24px;gap:4px;transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;overflow:auto;}
+    nav.primary.open{opacity:1;transform:translateY(0);pointer-events:auto;}
+    nav.primary a{padding:14px 12px;border-bottom:1px solid var(--line);border-radius:0;}
+    .nav-cta{display:none;}
+    .menu-toggle{display:flex;}
+  }
+
+  /* HERO CAROUSEL */
+  .hero{position:relative;color:#fff;overflow:hidden;min-height:clamp(480px,62vw,620px);display:flex;align-items:center;}
+  .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;background-size:cover;background-position:center;}
+  .hero-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,24,50,.92) 0%,rgba(8,24,50,.75) 42%,rgba(8,24,50,.35) 100%);}
+  .hero-slide.active{opacity:1;}
+  .hero-inner{position:relative;z-index:2;max-width:640px;padding:0 clamp(20px,4vw,32px);}
+  .hero-inner .eyebrow{background:rgba(242,183,5,.16);border-color:var(--gold-500);color:#fff;}
+  .hero h1{font-size:clamp(2.1rem,4.4vw,3.3rem);color:#fff;font-weight:700;letter-spacing:-.01em;margin-top:16px;}
+  .hero .lead{margin-top:16px;font-size:clamp(1rem,1.3vw,1.15rem);color:#D7DEEC;max-width:52ch;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
+  .hero-dots{position:absolute;left:clamp(20px,4vw,32px);bottom:28px;z-index:3;display:flex;gap:8px;}
+  .hero-dots button{width:28px;height:4px;border-radius:2px;border:none;background:rgba(255,255,255,.35);cursor:pointer;padding:0;}
+  .hero-dots button[aria-current="true"]{background:var(--gold-500);}
+
+  /* Feature strip — overlaps hero bottom */
+  .feature-strip{position:relative;z-index:5;margin-top:clamp(-56px,-6vw,-44px);}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-lift);padding:clamp(20px,3vw,32px);}
+  .feature-item{display:flex;align-items:center;gap:14px;}
+  .feature-item .ic{flex:none;width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;}
+  .feature-item:nth-child(1) .ic{background:var(--gold-100);color:var(--gold-600);}
+  .feature-item:nth-child(2) .ic{background:var(--teal-100);color:var(--teal-600);}
+  .feature-item:nth-child(3) .ic{background:#FCE4E0;color:var(--coral-500);}
+  .feature-item strong{display:block;font-family:var(--font-head);font-size:1.02rem;color:var(--navy-900);}
+  .feature-item span{font-size:.85rem;color:var(--text-muted);}
+  @media (max-width:760px){.feature-grid{grid-template-columns:1fr;}}
+
+  /* Search band */
+  .search-band{background:var(--navy-900);color:#fff;text-align:center;}
+  .search-band h2{color:#fff;font-size:clamp(1.6rem,2.8vw,2.2rem);max-width:34ch;margin:0 auto;}
+  .search-band p{color:#C6CEE1;max-width:56ch;margin:14px auto 0;}
+  .search-form{display:flex;max-width:560px;margin:32px auto 0;background:#fff;border-radius:999px;padding:6px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);}
+  .search-form input{flex:1;border:none;outline:none;padding:12px 18px;font-family:var(--font-body);font-size:1rem;border-radius:999px;color:var(--text-body);}
+  .search-form button{border:none;background:var(--gold-500);color:var(--navy-900);font-family:var(--font-head);font-weight:700;padding:12px 24px;border-radius:999px;cursor:pointer;}
+  .search-form button:hover{background:var(--gold-600);}
+
+  /* Video */
+  .video-wrap{max-width:880px;margin:0 auto;position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);aspect-ratio:16/8;background:#000;}
+  .video-wrap button.facade{position:absolute;inset:0;width:100%;height:100%;border:none;cursor:pointer;padding:0;background:none;}
+  .video-wrap img{width:100%;height:100%;object-fit:cover;opacity:.8;}
+  .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:var(--gold-500);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(0,0,0,.4);}
+  .play-btn svg{width:26px;height:26px;color:var(--navy-900);margin-left:3px;}
+  .video-wrap iframe{width:100%;height:100%;border:0;display:block;}
+
+  /* Section head */
+  .section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:36px;}
+  .section-head h2{font-size:clamp(1.7rem,2.8vw,2.3rem);max-width:44ch;}
+  .section-head p{color:var(--text-muted);margin-top:10px;max-width:52ch;}
+  .bg-soft{background:var(--bg-soft);}
+
+  /* Filter */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:28px;}
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--navy-800);padding:9px 16px;border-radius:999px;font-weight:600;font-size:.85rem;cursor:pointer;}
+  .chip[aria-pressed="true"]{background:var(--navy-900);border-color:var(--navy-900);color:#fff;}
+
+  /* Course cards — marketplace style */
+  .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media (max-width:940px){.card-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:620px){.card-grid{grid-template-columns:1fr;}}
+  .course-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-card);display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease;}
+  .course-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);}
+  .course-card .thumb{aspect-ratio:16/10;overflow:hidden;background:var(--bg-soft-2);position:relative;}
+  .course-card .thumb img{width:100%;height:100%;object-fit:cover;}
+  .course-card .ribbon{position:absolute;top:14px;left:-6px;background:var(--coral-500);color:#fff;font-size:.72rem;font-weight:700;padding:5px 14px 5px 18px;border-radius:0 4px 4px 0;box-shadow:0 6px 14px -6px rgba(0,0,0,.4);}
+  .course-card .tag{position:absolute;top:14px;right:14px;background:rgba(8,24,50,.85);color:#fff;font-size:.7rem;font-weight:700;padding:5px 10px;border-radius:999px;}
+  .course-card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .course-card .date-row{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--teal-600);font-weight:600;}
+  .course-card .date-row svg{width:14px;height:14px;}
+  .course-card h3{font-size:1.02rem;line-height:1.35;}
+  .course-card h3 a:hover{color:var(--teal-600);}
+  .course-card .meta{font-size:.82rem;color:var(--text-muted);}
+  .course-card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px dashed var(--line);}
+  .course-card .quota{font-size:.76rem;color:var(--coral-500);font-weight:700;}
+  .course-card .foot a.btn{padding:9px 16px;font-size:.82rem;}
+  .empty-state{display:none;text-align:center;padding:40px 20px;color:var(--text-muted);border:1.5px dashed var(--line);border-radius:var(--radius-md);}
+  .empty-state.show{display:block;}
+  .see-more-wrap{text-align:center;margin-top:36px;}
+
+  /* Client logos */
+  .logo-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;}
+  .logo-strip span{flex:1 1 160px;max-width:190px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 14px;font-weight:700;color:var(--text-muted);font-size:.85rem;}
+
+  /* About collage */
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:center;}
+  .collage{position:relative;height:clamp(320px,32vw,420px);}
+  .collage img{position:absolute;border-radius:16px;object-fit:cover;box-shadow:var(--shadow-card);border:5px solid #fff;}
+  .collage .c1{width:58%;height:70%;top:0;left:0;z-index:2;}
+  .collage .c2{width:48%;height:52%;bottom:0;right:0;z-index:3;}
+  .collage .c3{width:38%;height:38%;top:12%;right:6%;z-index:1;}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;}.collage{max-width:420px;margin:0 auto;}}
+  .about-copy h2{font-size:clamp(1.7rem,2.8vw,2.3rem);}
+  .about-copy p{margin-top:16px;color:var(--text-muted);font-size:1.02rem;}
+  .branch-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px;}
+  @media (max-width:520px){.branch-grid{grid-template-columns:1fr;}}
+  .branch-card{border-left:3px solid var(--gold-500);padding-left:14px;}
+  .branch-card strong{display:block;font-family:var(--font-head);font-size:1rem;color:var(--navy-900);}
+  .branch-card span{font-size:.88rem;color:var(--text-muted);}
+
+  /* Testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  @media (max-width:980px){.testi-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-md);padding:24px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:12px;}
+  .stars{display:flex;gap:3px;color:var(--gold-500);}
+  .stars svg{width:15px;height:15px;}
+  .testi-card p.quote{color:var(--text-body);font-size:.94rem;flex:1;}
+  .testi-card .who strong{display:block;font-size:.88rem;}
+  .testi-card .who span{font-size:.76rem;color:var(--text-muted);}
+  .note-placeholder{margin-top:20px;font-size:.82rem;color:var(--text-muted);background:var(--gold-100);border:1px dashed var(--gold-600);border-radius:10px;padding:12px 16px;}
+
+  /* News */
+  .news-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  @media (max-width:980px){.news-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.news-grid{grid-template-columns:1fr;}}
+  .news-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;background:#fff;transition:transform .18s ease;}
+  .news-card:hover{transform:translateY(-3px);}
+  .news-card .thumb{aspect-ratio:16/10;overflow:hidden;}
+  .news-card .thumb img{width:100%;height:100%;object-fit:cover;}
+  .news-card .body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .news-card .date{font-size:.76rem;color:var(--teal-600);font-weight:700;}
+  .news-card h3{font-size:.94rem;line-height:1.4;}
+  .news-card h3 a:hover{color:var(--teal-600);}
+  .news-card .more{margin-top:auto;font-size:.82rem;font-weight:700;color:var(--navy-900);}
+
+  /* CTA / channel band */
+  .channel-band{background:linear-gradient(120deg,var(--navy-900),var(--navy-700));border-radius:var(--radius-lg);padding:clamp(36px,5vw,56px);color:#fff;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;}
+  .channel-band h2{color:#fff;font-size:clamp(1.4rem,2.4vw,1.9rem);max-width:34ch;}
+  .channel-band p{color:#C6CEE1;margin-top:8px;}
+
+  /* Footer */
+  footer.site{background:var(--navy-900);color:#C6CEE1;padding:56px 0 28px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px;}
+  @media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+  footer.site h4{color:#fff;font-size:.95rem;margin-bottom:14px;}
+  footer.site .brand-foot{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  footer.site .brand-foot img{height:36px;border-radius:6px;}
+  footer.site .brand-foot strong{color:#fff;font-family:var(--font-head);}
+  footer.site p{font-size:.88rem;color:#AEB9D2;}
+  footer.site ul li{margin-bottom:10px;}
+  footer.site ul a{font-size:.88rem;color:#C6CEE1;}
+  footer.site ul a:hover{color:var(--gold-500);}
+  .social-row{display:flex;gap:10px;margin-top:16px;}
+  .social-row a{width:38px;height:38px;border-radius:9px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;}
+  .social-row a:hover{background:rgba(255,255,255,.08);}
+  .social-row svg{width:17px;height:17px;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.14);margin-top:40px;padding-top:20px;font-size:.82rem;color:#93A0C0;text-align:center;}
+
+  /* WhatsApp floating */
+  .wa-float{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;align-items:center;gap:10px;background:#fff;color:var(--navy-900);border-radius:999px;box-shadow:0 12px 28px -10px rgba(10,31,60,.5);padding:6px;border:1px solid var(--line);}
+  .wa-float .ic{width:46px;height:46px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex:none;}
+  .wa-float .ic svg{width:24px;height:24px;color:#fff;}
+  .wa-float .txt{padding-right:14px;font-size:.82rem;font-weight:600;max-width:150px;line-height:1.2;}
+  .wa-float .txt span{display:block;color:var(--text-muted);font-weight:500;font-size:.74rem;}
+  @media (max-width:640px){.wa-float .txt{display:none;}.wa-float{padding:0;}.wa-float .ic{width:52px;height:52px;}}
+  main{padding-bottom:76px;}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Langsung ke konten utama</a>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top">
+      <img src="https://ntcui.id/wp-content/uploads/Logo-NTC-New.jpg" alt="Logo Nursing Training Center FIK UI" width="40" height="40" loading="eager">
+      <span class="brand-text">Nursing Training Center<small>FAKULTAS ILMU KEPERAWATAN UI</small></span>
+    </a>
+    <nav class="primary" id="primaryNav">
+      <a href="#top">Beranda</a>
+      <a href="#tentang">Tentang Kami</a>
+      <a href="#pelatihan">Pelatihan</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#berita">Berita</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary nav-cta" href="https://wa.me/628111100826" target="_blank" rel="noopener">Konsultasi Pelatihan</a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Buka menu navigasi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO CAROUSEL -->
+  <section class="hero" id="top" aria-roledescription="carousel">
+    <div class="hero-slide active" style="background-image:url('https://ntcui.id/wp-content/uploads/Rawat-luka.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('https://ntcui.id/wp-content/uploads/TOT-BTCLS.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('https://ntcui.id/wp-content/uploads/icu.jpg')"></div>
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="eyebrow">Terakreditasi A oleh Kementerian Kesehatan RI</span>
+        <h1 id="heroHeadline">Tingkatkan Kompetensi Bersama Nursing Training Center FIK UI</h1>
+        <p class="lead" id="heroLead">Seminar, workshop, dan pelatihan bersertifikat bagi tenaga kesehatan, mahasiswa, dan masyarakat umum — diselenggarakan oleh Fakultas Ilmu Keperawatan Universitas Indonesia.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#pelatihan">Lihat Pelatihan</a>
+          <a class="btn btn-outline" href="https://wa.me/628111100826" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots">
+      <button aria-current="true" data-i="0" aria-label="Slide 1"></button>
+      <button aria-current="false" data-i="1" aria-label="Slide 2"></button>
+      <button aria-current="false" data-i="2" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- FEATURE STRIP -->
+  <div class="wrap feature-strip">
+    <div class="feature-grid">
+      <div class="feature-item">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>
+        <div><strong>6+ Program Pelatihan</strong><span>Kegawatdaruratan hingga keperawatan intensif</span></div>
+      </div>
+      <div class="feature-item">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>
+        <div><strong>Instruktur Berpengalaman</strong><span>Praktisi dan akademisi keperawatan UI</span></div>
+      </div>
+      <div class="feature-item">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <div><strong>Fokus Pada Kompetensi</strong><span>Sertifikasi resmi sesuai standar Kemenkes</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH BAND -->
+  <section class="search-band">
+    <div class="wrap">
+      <h2>Siap Belajar Bersama NTC FIK UI?</h2>
+      <p>Konsultasikan kebutuhan pelatihan Anda lewat WhatsApp, atau cari langsung program yang sesuai kebutuhan Anda di bawah ini.</p>
+      <form class="search-form" id="heroSearchForm">
+        <input type="search" id="heroSearchInput" placeholder="Cari pelatihan, mis. BTCLS, luka, ICU..." aria-label="Cari pelatihan">
+        <button type="submit">Cari</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="justify-content:center;text-align:center;">
+        <div style="margin:0 auto;">
+          <span class="eyebrow">Video Profil</span>
+          <h2 style="margin-top:14px;">Kenali NTC FIK UI Lebih Dekat</h2>
+          <p style="margin-left:auto;margin-right:auto;">Simak profil singkat program pelatihan dan aktivitas kami di kanal YouTube resmi.</p>
+        </div>
+      </div>
+      <div class="video-wrap" id="videoFrame">
+        <button class="facade" id="playVideo" aria-label="Putar video profil NTC FIK UI">
+          <img src="https://ntcui.id/wp-content/uploads/zona-Integritas-1024x880.jpg" alt="Cuplikan kegiatan Nursing Training Center FIK UI" loading="lazy">
+          <span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR COURSES -->
+  <section id="pelatihan" class="bg-soft">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Katalog Pelatihan</span>
+          <h2 style="margin-top:14px;">Pelatihan Populer</h2>
+          <p>Program yang sedang dibuka pendaftarannya — cari berdasarkan kata kunci atau kategori.</p>
+        </div>
+        <a class="btn btn-dark" href="https://ntcui.id/berita/" target="_blank" rel="noopener">Lihat Semua Pelatihan</a>
+      </div>
+
+      <div class="filter-bar">
+        <button class="chip" data-filter="semua" aria-pressed="true">Semua</button>
+        <button class="chip" data-filter="kegawatdaruratan" aria-pressed="false">Kegawatdaruratan</button>
+        <button class="chip" data-filter="jiwa" aria-pressed="false">Keperawatan Jiwa</button>
+        <button class="chip" data-filter="anak" aria-pressed="false">Keperawatan Anak</button>
+        <button class="chip" data-filter="bedah" aria-pressed="false">Kamar Bedah</button>
+        <button class="chip" data-filter="intensif" aria-pressed="false">Keperawatan Intensif</button>
+      </div>
+
+      <div class="card-grid" id="courseGrid">
+        <article class="course-card" data-cat="bedah" data-title="pelatihan perawatan luka bagi praktisi kesehatan di fasilitas pelayanan kesehatan">
+          <div class="thumb">
+            <span class="ribbon">Pendaftaran Dibuka</span>
+            <span class="tag">Manajemen Luka</span>
+            <img src="https://ntcui.id/wp-content/uploads/Rawat-luka.jpg" alt="Pelatihan perawatan luka bagi praktisi kesehatan" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="date-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>23–27 September 2026</span>
+            <h3><a href="https://ntcui.id/perawatan-luka/">Pelatihan Perawatan Luka bagi Praktisi Kesehatan</a></h3>
+            <p class="meta">Fasilitas Pelayanan Kesehatan</p>
+            <div class="foot"><span class="quota">Kuota terbatas</span><a class="btn btn-primary" href="https://ntcui.id/perawatan-luka/">Daftar Sekarang</a></div>
+          </div>
+        </article>
+
+        <article class="course-card" data-cat="jiwa" data-title="pelatihan asuhan keperawatan jiwa dasar">
+          <div class="thumb">
+            <span class="tag">Keperawatan Jiwa</span>
+            <img src="https://ntcui.id/wp-content/uploads/Jiwa-dasar.jpg" alt="Pelatihan asuhan keperawatan jiwa dasar" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="date-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>22–26 September 2026</span>
+            <h3><a href="https://ntcui.id/askep-jiwa/">Pelatihan Asuhan Keperawatan Jiwa Dasar</a></h3>
+            <p class="meta">Keperawatan Jiwa Dasar</p>
+            <div class="foot"><span class="quota">Kuota terbatas</span><a class="btn btn-primary" href="https://ntcui.id/askep-jiwa/">Daftar Sekarang</a></div>
+          </div>
+        </article>
+
+        <article class="course-card" data-cat="anak" data-title="pelatihan pengasuh anak profesional">
+          <div class="thumb">
+            <span class="tag">Keperawatan Anak</span>
+            <img src="https://ntcui.id/wp-content/uploads/pengasuh-anak-1.jpg" alt="Pelatihan pengasuh anak profesional" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="date-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>21–26 September 2026</span>
+            <h3><a href="https://ntcui.id/pengasuh-anak/">Pelatihan Pengasuh Anak Profesional</a></h3>
+            <p class="meta">Perawatan Anak Profesional</p>
+            <div class="foot"><span class="quota">Kuota terbatas</span><a class="btn btn-primary" href="https://ntcui.id/pengasuh-anak/">Daftar Sekarang</a></div>
+          </div>
+        </article>
+
+        <article class="course-card" data-cat="kegawatdaruratan" data-title="pelatihan training of trainer tot basic trauma cardiac life support btcls">
+          <div class="thumb">
+            <span class="ribbon">Pendaftaran Dibuka</span>
+            <span class="tag">Kegawatdaruratan</span>
+            <img src="https://ntcui.id/wp-content/uploads/TOT-BTCLS.jpg" alt="Pelatihan TOT BTCLS" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="date-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>21–26 September 2026</span>
+            <h3><a href="https://ntcui.id/tot-btcls/">Training of Trainer (TOT) BTCLS</a></h3>
+            <p class="meta">Basic Trauma Cardiac Life Support</p>
+            <div class="foot"><span class="quota">Kuota terbatas</span><a class="btn btn-primary" href="https://ntcui.id/tot-btcls/">Daftar Sekarang</a></div>
+          </div>
+        </article>
+
+        <article class="course-card" data-cat="intensif" data-title="pelatihan pelayanan keperawatan intensif icu">
+          <div class="thumb">
+            <span class="tag">Keperawatan Intensif</span>
+            <img src="https://ntcui.id/wp-content/uploads/icu.jpg" alt="Pelatihan pelayanan keperawatan intensif ICU" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="date-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>9 Nov – 31 Des 2026</span>
+            <h3><a href="https://ntcui.id/icu/">Pelayanan Keperawatan Intensif (ICU)</a></h3>
+            <p class="meta">Ruang Perawatan Intensif</p>
+            <div class="foot"><span class="quota">Kuota terbatas</span><a class="btn btn-primary" href="https://ntcui.id/icu/">Daftar Sekarang</a></div>
+          </div>
+        </article>
+
+        <article class="course-card" data-cat="bedah" data-title="pelatihan asuhan keperawatan laparoskopi digestive ginekologi untuk perawat kamar bedah">
+          <div class="thumb">
+            <span class="tag">Kamar Bedah</span>
+            <img src="https://ntcui.id/wp-content/uploads/laparascopy.jpg" alt="Pelatihan laparoskopi digestive dan ginekologi" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="date-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>2–30 November 2026</span>
+            <h3><a href="https://ntcui.id/laparascopy/">Laparoskopi Digestive &amp; Ginekologi</a></h3>
+            <p class="meta">Perawat Kamar Bedah</p>
+            <div class="foot"><span class="quota">Kuota terbatas</span><a class="btn btn-primary" href="https://ntcui.id/laparascopy/">Daftar Sekarang</a></div>
+          </div>
+        </article>
+      </div>
+      <p class="empty-state" id="emptyState">Tidak ada pelatihan yang cocok dengan pencarian Anda. Coba kata kunci atau kategori lain.</p>
+    </div>
+  </section>
+
+  <!-- CLIENT / PARTNER STRIP -->
+  <section style="padding-top:0;padding-bottom:40px;">
+    <div class="wrap">
+      <p style="text-align:center;color:var(--text-muted);font-weight:600;margin-bottom:20px;">Dipercaya oleh tenaga kesehatan dari berbagai institusi</p>
+      <div class="logo-strip" aria-label="Logo mitra kerja sama (placeholder — ganti dengan logo resmi)">
+        <span>Logo Mitra 1</span><span>Logo Mitra 2</span><span>Logo Mitra 3</span><span>Logo Mitra 4</span><span>Logo Mitra 5</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="tentang" class="bg-soft">
+    <div class="wrap about-grid">
+      <div class="collage">
+        <img class="c1" src="https://ntcui.id/wp-content/uploads/Rawat-luka.jpg" alt="Sesi pelatihan perawatan luka NTC FIK UI" loading="lazy">
+        <img class="c2" src="https://ntcui.id/wp-content/uploads/icu.jpg" alt="Sesi pelatihan keperawatan intensif NTC FIK UI" loading="lazy">
+        <img class="c3" src="https://ntcui.id/wp-content/uploads/TOT-BTCLS.jpg" alt="Sesi pelatihan TOT BTCLS NTC FIK UI" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">Tentang Kami</span>
+        <h2 style="margin-top:14px;">Unit Kerja Khusus Pengabdian dan Pelayanan Masyarakat UI</h2>
+        <p>NTC FIK UI adalah Unit Kerja Khusus Pengabdian dan Pelayanan Masyarakat (UKKPPM) di lingkungan Universitas Indonesia yang menyediakan layanan seminar, workshop, dan pelatihan kesehatan bagi tenaga kesehatan, mahasiswa, praktisi pendidikan kesehatan, maupun masyarakat umum.</p>
+        <p>Kami berkomitmen menghadirkan pelatihan yang aplikatif, dibimbing langsung oleh praktisi dan akademisi Fakultas Ilmu Keperawatan UI, dengan sertifikasi yang diakui secara resmi.</p>
+        <div class="branch-grid">
+          <div class="branch-card"><strong>Kampus UI Depok</strong><span>Gedung Pendidikan &amp; Laboratorium FIK UI Lantai 1</span></div>
+          <div class="branch-card"><strong>Kelas In-House</strong><span>Pelatihan dapat diselenggarakan langsung di institusi Anda</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimoni">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Testimoni</span>
+          <h2 style="margin-top:14px;">Apa Kata Peserta Kami?</h2>
+        </div>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="quote">"Materinya aplikatif dan langsung bisa dipraktikkan di ruang perawatan. Instrukturnya juga sangat kompeten."</p>
+          <div class="who"><strong>Peserta Pelatihan Perawatan Luka</strong><span>Tenaga kesehatan mitra RS</span></div>
+        </div>
+        <div class="testi-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="quote">"Sertifikasi BTCLS dari NTC FIK UI diakui luas dan pelatihannya terstruktur rapi dari awal sampai akhir."</p>
+          <div class="who"><strong>Peserta TOT BTCLS</strong><span>Perawat pelaksana</span></div>
+        </div>
+        <div class="testi-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="quote">"Kolaborasi pelatihan dengan NTC FIK UI membantu tim kami meningkatkan kompetensi klinis secara berkelanjutan."</p>
+          <div class="who"><strong>Perwakilan Mitra Institusi</strong><span>Fasilitas pelayanan kesehatan</span></div>
+        </div>
+        <div class="testi-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="quote">"Fasilitator sangat komunikatif, studi kasusnya relevan dengan kondisi kerja kami sehari-hari."</p>
+          <div class="who"><strong>Peserta Pelatihan ICU</strong><span>Perawat unit intensif</span></div>
+        </div>
+      </div>
+      <p class="note-placeholder">Catatan: testimoni dan logo mitra pada halaman ini adalah placeholder desain — mohon diganti dengan kutipan dan logo resmi sebelum situs dipublikasikan.</p>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="berita" class="bg-soft">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Berita</span>
+          <h2 style="margin-top:14px;">Kabar Terbaru dari NTC FIK UI</h2>
+        </div>
+        <a class="btn btn-dark" href="https://ntcui.id/berita/" target="_blank" rel="noopener">Berita Lainnya</a>
+      </div>
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="thumb"><img src="https://ntcui.id/wp-content/uploads/umpri1-400x266.jpg" alt="Pelatihan BTCLS NTC FIK UI di Lampung bersama UMPRI" loading="lazy"></div>
+          <div class="body">
+            <span class="date">BERITA</span>
+            <h3><a href="https://ntcui.id/ntc-fik-ui-sukses-selenggarakan-pelatihan-btcls-bersama-umpri/">NTC FIK UI Sukses Selenggarakan Pelatihan BTCLS di Lampung Bersama UMPRI</a></h3>
+            <a class="more" href="https://ntcui.id/ntc-fik-ui-sukses-selenggarakan-pelatihan-btcls-bersama-umpri/">Baca selengkapnya →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="thumb"><img src="https://ntcui.id/wp-content/uploads/perwtn-luka-baitulhikmah-400x266.jpg" alt="Praktisi kesehatan mengikuti pelatihan perawatan luka bersama NTC FIK UI" loading="lazy"></div>
+          <div class="body">
+            <span class="date">BERITA</span>
+            <h3><a href="https://ntcui.id/30-praktisi-kesehatan/">30 Praktisi Kesehatan Tingkatkan Kompetensi Melalui Pelatihan Perawatan Luka</a></h3>
+            <a class="more" href="https://ntcui.id/30-praktisi-kesehatan/">Baca selengkapnya →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="thumb"><img src="https://ntcui.id/wp-content/uploads/kerjasama-IJH-400x238.jpg" alt="Audiensi NTC FIK UI dengan Indonesia Japan Healthcare" loading="lazy"></div>
+          <div class="body">
+            <span class="date">BERITA</span>
+            <h3><a href="https://ntcui.id/ntc-fik-ui-perkuat-jejaring-global-melalui-audiensi-dengan-indonesia-japan-healthcare-ijh/">NTC FIK UI Perkuat Jejaring Global Melalui Audiensi dengan IJH</a></h3>
+            <a class="more" href="https://ntcui.id/ntc-fik-ui-perkuat-jejaring-global-melalui-audiensi-dengan-indonesia-japan-healthcare-ijh/">Baca selengkapnya →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="thumb"><img src="https://ntcui.id/wp-content/uploads/NTC-Sanesu1-400x267.jpg" alt="Penjajakan kelas industri NTC UI, Makara UI Academy, Fasilkom UI, dan SANESU" loading="lazy"></div>
+          <div class="body">
+            <span class="date">BERITA</span>
+            <h3><a href="https://ntcui.id/ntc-ui-sanesu-jajaki-pembukaan-kelas-industri-untuk-perluas-peluang-kerja-ke-jepang/">NTC UI, Fasilkom UI, dan SANESU Jajaki Kelas Industri ke Jepang</a></h3>
+            <a class="more" href="https://ntcui.id/ntc-ui-sanesu-jajaki-pembukaan-kelas-industri-untuk-perluas-peluang-kerja-ke-jepang/">Baca selengkapnya →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNEL BAND -->
+  <section>
+    <div class="wrap">
+      <div class="channel-band">
+        <div>
+          <h2>Ikuti Kabar Pelatihan Terbaru</h2>
+          <p>Gabung Channel WhatsApp kami untuk info jadwal, promo, dan pelatihan terbaru langsung dari NTC FIK UI.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a class="btn btn-primary" href="https://whatsapp.com/channel/0029Vb27K3i4NVifZ4rXUX0y" target="_blank" rel="noopener">Gabung Channel WhatsApp</a>
+          <a class="btn btn-outline" href="https://www.instagram.com/nursingtrainingcenter_ui/" target="_blank" rel="noopener">Ikuti Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site" id="kontak">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="brand-foot">
+        <img src="https://ntcui.id/wp-content/uploads/Logo-NTC-New.jpg" alt="Logo Nursing Training Center FIK UI" loading="lazy">
+        <strong>Nursing Training Center FIK UI</strong>
+      </div>
+      <p>Nursing Training Center adalah unit pelatihan dan pengabdian masyarakat di bawah Fakultas Ilmu Keperawatan Universitas Indonesia, terakreditasi A oleh Kementerian Kesehatan Republik Indonesia.</p>
+      <div class="social-row">
+        <a href="https://www.facebook.com/NTCUI" target="_blank" rel="noopener" aria-label="Facebook NTC FIK UI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/nursingtrainingcenter_ui/" target="_blank" rel="noopener" aria-label="Instagram NTC FIK UI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/ntcui/" target="_blank" rel="noopener" aria-label="LinkedIn NTC FIK UI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v2a6 6 0 0 1 2-2z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.youtube.com/@nursingtrainingcenter_ui" target="_blank" rel="noopener" aria-label="YouTube NTC FIK UI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>Perusahaan</h4>
+      <ul>
+        <li><a href="#tentang">Tentang Kami</a></li>
+        <li><a href="#pelatihan">Pelatihan</a></li>
+        <li><a href="#berita">Berita</a></li>
+        <li><a href="https://www.uiacademy.id/caregiver" target="_blank" rel="noopener">Karir ke Jepang</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontak</h4>
+      <ul>
+        <li><a href="https://wa.me/628111100826" target="_blank" rel="noopener">WhatsApp: +62 811-1100-826</a></li>
+        <li><a href="mailto:ntc.fikui@gmail.com">ntc.fikui@gmail.com</a></li>
+        <li><a href="https://maps.google.com/maps?q=Nursing+Training+Center+FIK+UI" target="_blank" rel="noopener">Buka di Google Maps</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Sekretariat</h4>
+      <p>Gedung Pendidikan &amp; Laboratorium, Fakultas Ilmu Keperawatan UI Lantai 1, Kampus UI Depok, Pondok Cina, Beji, Kota Depok, Jawa Barat 16424</p>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">Copyright © 2026 — Nursing Training Center FIK UI</div>
+</footer>
+
+<div class="wa-float">
+  <a class="ic" href="https://wa.me/628111100826" target="_blank" rel="noopener" aria-label="Chat WhatsApp NTC FIK UI">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 3.9 18l-1.4 5 5.1-1.4A11 11 0 1 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3A9 9 0 1 1 12 20.5Zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1s-.7.9-.9 1-.3.2-.6.1a7.3 7.3 0 0 1-2.1-1.3 8 8 0 0 1-1.5-1.9c-.2-.3 0-.5.1-.6l.4-.5.2-.4a.5.5 0 0 0 0-.5c-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.6 1.1 2.8s1.7 2.7 4.2 3.7c2.4 1 2.4.7 2.9.6a2.5 2.5 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c-.1-.1-.3-.2-.6-.3Z"/></svg>
+  </a>
+  <span class="txt">Butuh bantuan? <span>Chat dengan kami</span></span>
+</div>
+
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const primaryNav = document.getElementById('primaryNav');
+  menuToggle.addEventListener('click', () => {
+    const open = primaryNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  primaryNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    primaryNav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Hero carousel
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dots button');
+  const headlines = [
+    { h: 'Tingkatkan Kompetensi Bersama Nursing Training Center FIK UI', p: 'Seminar, workshop, dan pelatihan bersertifikat bagi tenaga kesehatan, mahasiswa, dan masyarakat umum — diselenggarakan oleh Fakultas Ilmu Keperawatan Universitas Indonesia.' },
+    { h: 'Pelatihan Bersertifikat untuk Masa Depan Karier yang Lebih Baik', p: 'Program kompetensi klinis seperti BTCLS, manajemen luka, hingga keperawatan intensif — dibimbing langsung oleh praktisi berpengalaman.' },
+    { h: 'Pendidikan Berkelanjutan adalah Kunci Kompetensi Profesional', p: 'Kembangkan kemampuan klinis dan manajerial Anda bersama unit pelatihan resmi Fakultas Ilmu Keperawatan Universitas Indonesia.' }
+  ];
+  let current = 0, timer;
+  function showSlide(i){
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    dots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
+    document.getElementById('heroHeadline').textContent = headlines[i].h;
+    document.getElementById('heroLead').textContent = headlines[i].p;
+    current = i;
+  }
+  function nextSlide(){ showSlide((current + 1) % slides.length); }
+  function startAuto(){ timer = setInterval(nextSlide, 6000); }
+  function stopAuto(){ clearInterval(timer); }
+  dots.forEach(d => d.addEventListener('click', () => { showSlide(parseInt(d.dataset.i, 10)); stopAuto(); startAuto(); }));
+  document.querySelector('.hero').addEventListener('mouseenter', stopAuto);
+  document.querySelector('.hero').addEventListener('mouseleave', startAuto);
+  startAuto();
+
+  // Course filter (category + search, shared with hero search)
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.course-card');
+  const emptyState = document.getElementById('emptyState');
+  const heroSearchForm = document.getElementById('heroSearchForm');
+  const heroSearchInput = document.getElementById('heroSearchInput');
+  let activeCat = 'semua';
+  let activeQuery = '';
+
+  function applyFilter(){
+    let visible = 0;
+    cards.forEach(card => {
+      const matchCat = activeCat === 'semua' || card.dataset.cat === activeCat;
+      const matchSearch = !activeQuery || card.dataset.title.includes(activeQuery);
+      const show = matchCat && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyState.classList.toggle('show', visible === 0);
+  }
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.setAttribute('aria-pressed','false'));
+      chip.setAttribute('aria-pressed','true');
+      activeCat = chip.dataset.filter;
+      applyFilter();
+    });
+  });
+  heroSearchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    activeQuery = heroSearchInput.value.trim().toLowerCase();
+    applyFilter();
+    document.getElementById('pelatihan').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Video facade
+  document.getElementById('playVideo').addEventListener('click', function(){
+    const frame = document.getElementById('videoFrame');
+    frame.innerHTML = '<iframe src="https://www.youtube.com/embed/videoseries?list=UU_nursingtrainingcenter_ui&autoplay=1" title="Video profil Nursing Training Center FIK UI" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  });
+</script>
+
+</body>
+</html>
